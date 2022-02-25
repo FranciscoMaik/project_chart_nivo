@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useOrdinalColorScale } from "@nivo/colors";
+import { useOrdinalColorScale, getOrdinalColorScale } from "@nivo/colors";
 import { ResponsiveLine } from '@nivo/line';
 import { Flex } from '@chakra-ui/react';
 import {data as dataR} from './data'
@@ -7,18 +7,26 @@ import {data as dataR} from './data'
 
 export const ChartLineRemoveItem: React.FC = () => {
     const [hiddenIds, setHiddenIds] = useState<string[]>([]);
+    const [colorsItem, setColorsItem] = useState<string[]>([]);
+
+
+    console.log("💻 ~ file: index.tsx ~ line 10 ~ hiddenIds", hiddenIds)
     const data = useMemo(
         () => dataR.filter((item) => !hiddenIds.includes(item.id)),
         [hiddenIds]
     );
 
-    const colors = useOrdinalColorScale({ scheme: "nivo" }, "id");
+    // const colors = useOrdinalColorScale({scheme: "accent"}, "id");
+
+    const colors = data.map((item) => item.color)
+    
 
 
     return (
         <Flex w="100%" h="400px">
             <ResponsiveLine 
                 data={data}
+                colors={colors}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: 'point' }}
                 yScale={{
@@ -59,8 +67,9 @@ export const ChartLineRemoveItem: React.FC = () => {
                 legends={[
                     {
                         anchor: 'bottom-right',
-                        data: dataR.map((item) => {
-                            const color = colors(item);
+                        data: dataR.map((item,index) => {
+                            // const color = colors(item);
+                            const color = item.color;
                 
                             return {
                               color: hiddenIds.includes(item.id) ? "rgba(1, 1, 1, .1)" : color,
