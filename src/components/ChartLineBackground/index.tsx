@@ -3,7 +3,7 @@ import { ResponsiveLine } from '@nivo/line';
 import { Flex } from '@chakra-ui/react';
 
 
-export const ChartLine: React.FC = () => {
+export const ChartLineBackground: React.FC = () => {
     const d = [
         {
             'id': 'graficoum',

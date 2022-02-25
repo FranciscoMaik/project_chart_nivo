@@ -1,12 +1,14 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 
-import { ChartLine } from './components/ChartLine'
+import { ChartLineRemoveItem } from './components/ChartLineRemoveItem';
+import { ChartLineBackground } from './components/ChartLineBackground';
 
 function App() {
   return (
     <ChakraProvider>
-      <ChartLine />
+      <ChartLineRemoveItem />
+      <ChartLineBackground />
     </ChakraProvider>
   );
 }
